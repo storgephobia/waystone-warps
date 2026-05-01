@@ -41,11 +41,11 @@ class WarpSkinsMenu(
         for (i in 0..2) {
             dividerPane.addItem(guiDividerItem, 0, i)
         }
-        gui.addPane(dividerPane, Slot.fromXY(1, 0))
+        gui.addPane(Slot.fromXY(1, 0), dividerPane)
 
         // Add back menu item
         val navigationPane = StaticPane(1, 3)
-        gui.addPane(navigationPane, Slot.fromXY(0, 0))
+        gui.addPane(Slot.fromXY(0, 0), navigationPane)
         val backItem = ItemStack(Material.NETHER_STAR)
             .name(localizationProvider.get(player.uniqueId, LocalizationKeys.MENU_COMMON_ITEM_BACK_NAME), PrimaryColourPalette.CANCELLED.color!!)
         val backGuiItem = GuiItem(backItem) { menuNavigator.goBack() }
@@ -74,6 +74,6 @@ class WarpSkinsMenu(
             val blockGuiItem = GuiItem(blockItem) { guiEvent -> guiEvent.isCancelled = true }
             blockListPane.addItem(blockGuiItem)
         }
-        gui.addPane(blockListPane, Slot.fromXY(2, 0))
+        gui.addPane(Slot.fromXY(2, 0), blockListPane)
     }
 }
