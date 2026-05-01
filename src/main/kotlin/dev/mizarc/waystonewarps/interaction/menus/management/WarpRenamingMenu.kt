@@ -52,7 +52,7 @@ class WarpRenamingMenu(
         }
 
         // Add lodestone menu item
-        val firstPane = StaticPane(0, 0, 1, 1)
+        val firstPane = StaticPane(1, 1)
         val lodestoneItem = ItemStack(Material.LODESTONE)
             .name(warp.name)
             .lore("${warp.position.x}, ${warp.position.y}, ${warp.position.z}")
@@ -61,11 +61,11 @@ class WarpRenamingMenu(
         gui.firstItemComponent.addPane(firstPane)
 
         // Add message menu item if name is already taken
-        val secondPane = StaticPane(0, 0, 1, 1)
+        val secondPane = StaticPane(1, 1)
         gui.secondItemComponent.addPane(secondPane)
 
         // Add confirm menu item.
-        val thirdPane = StaticPane(0, 0, 1, 1)
+        val thirdPane = StaticPane(1, 1)
         val confirmItem = ItemStack(Material.NETHER_STAR)
             .name(localizationProvider.get(player.uniqueId, LocalizationKeys.MENU_COMMON_ITEM_CONFIRM_NAME), PrimaryColourPalette.SUCCESS.color!!)
         val confirmGuiItem = GuiItem(confirmItem) { guiEvent ->
