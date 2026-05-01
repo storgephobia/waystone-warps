@@ -73,7 +73,7 @@ class WarpMenu(
 
         // Display warps
         val warpPane = displayWarps(filteredWarps)
-        gui.addPane(warpPane, Slot.fromXY(1, 2))
+        gui.addPane(Slot.fromXY(1, 2), warpPane)
 
         // Add warp paginator
         addPaginator(gui, warpPane.pages.coerceAtLeast(1), page) { newPage ->
@@ -104,11 +104,11 @@ class WarpMenu(
         ))
         outlinePane.addItem(guiDividerItem)
         outlinePane.setRepeat(true)
-        gui.addPane(outlinePane, Slot.fromXY(0, 1))
+        gui.addPane(Slot.fromXY(0, 1), outlinePane)
 
         // Add controls pane
         val controlsPane = StaticPane(6, 1)
-        gui.addPane(controlsPane, Slot.fromXY(0, 0))
+        gui.addPane(Slot.fromXY(0, 0), controlsPane)
 
         // Add go back item
         val exitItem = ItemStack(Material.NETHER_STAR)
@@ -223,7 +223,7 @@ class WarpMenu(
         }
 
         updatePaginator()
-        gui.addPane(paginatorPane, Slot.fromXY(6, 0))
+        gui.addPane(Slot.fromXY(6, 0), paginatorPane)
     }
 
     private fun displayWarps(warps: List<Warp>): PaginatedPane {
