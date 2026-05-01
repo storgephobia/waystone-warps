@@ -83,7 +83,7 @@ class WarpPlayerMenu(private val player: Player, private val menuNavigator: Menu
 
         // Pane of players
         val playerPane = displayPlayers(filteredPlayers, warp, gui)
-        gui.addPane(playerPane, Slot.fromXY(1, 2))
+        gui.addPane(Slot.fromXY(1, 2), playerPane)
 
         // Add paginator pane
         addPaginator(gui, playerPane.pages.coerceAtLeast(1), page) { newPage ->
@@ -115,11 +115,11 @@ class WarpPlayerMenu(private val player: Player, private val menuNavigator: Menu
         ))
         outlinePane.addItem(guiDividerItem)
         outlinePane.setRepeat(true)
-        gui.addPane(outlinePane, Slot.fromXY(0, 1))
+        gui.addPane(Slot.fromXY(0, 1), outlinePane)
 
         // Add controls pane
         val controlsPane = StaticPane(6, 1)
-        gui.addPane(controlsPane, Slot.fromXY(0, 0))
+        gui.addPane(Slot.fromXY(0, 0), controlsPane)
 
         // Add go back item
         val exitItem = ItemStack(Material.NETHER_STAR).name(localizationProvider.get(player.uniqueId, LocalizationKeys.MENU_COMMON_ITEM_BACK_NAME), PrimaryColourPalette.CANCELLED.color!!)
@@ -225,7 +225,7 @@ class WarpPlayerMenu(private val player: Player, private val menuNavigator: Menu
         }
 
         updatePaginator()
-        gui.addPane(paginatorPane, Slot.fromXY(6, 0))
+        gui.addPane(Slot.fromXY(6, 0), paginatorPane)
     }
 
     private fun displayPlayers(players: List<OfflinePlayer>, warp: Warp, gui: Gui): PaginatedPane {
