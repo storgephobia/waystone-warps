@@ -47,7 +47,7 @@ class WarpOptionsMenu(
         gui.setOnTopClick { guiEvent -> guiEvent.isCancelled = true }
         gui.setOnBottomClick { guiEvent -> if (guiEvent.click == ClickType.SHIFT_LEFT ||
             guiEvent.click == ClickType.SHIFT_RIGHT) guiEvent.isCancelled = true }
-        gui.slotsComponent.addPane(pane, Slot.fromXY(0, 0))
+        gui.slotsComponent.addPane(Slot.fromXY(0, 0), pane)
 
         // Add back menu item
         val backItem = ItemStack(Material.NETHER_STAR).name(
