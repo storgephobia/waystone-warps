@@ -52,6 +52,9 @@ class WarpIconMenu(
         val gui = FurnaceGui(title)
         gui.setOnTopClick { guiEvent -> guiEvent.isCancelled = true }
 
+        // Track the currently placed icon item
+        var currentIconItem: ItemStack? = null
+
         val fuelPane = StaticPane(0, 0, 1, 1)
 
         // Add info paper menu item
@@ -62,25 +65,48 @@ class WarpIconMenu(
         fuelPane.addItem(guiIconEditorItem, 0, 0)
         gui.fuelComponent.addPane(fuelPane)
 
-        // Allow item to be placed in the slot
+        // Allow item to be placed in the ingredient slot
         val inputPane = StaticPane(0, 0, 1, 1)
-        inputPane.setOnClick {guiEvent ->
-            guiEvent.isCancelled = true
-            val itemOnCursor = guiEvent.cursor
 
-            if (itemOnCursor.type == Material.AIR) {
-                inputPane.removeItem(0, 0)
-                gui.update()
-                return@setOnClick
-            }
-
-            inputPane.addItem(GuiItem(ItemStack(itemOnCursor.clone())), 0, 0)
-            gui.update()
-            thread(start = true) {
-                Thread.sleep(1)
-                player.setItemOnCursor(itemOnCursor)
+        fun refreshInputPane() {
+            inputPane.clear()
+            val icon = currentIconItem
+            if (icon != null) {
+                val displayItem = GuiItem(icon.clone()) { guiEvent ->
+                    guiEvent.isCancelled = true
+                    val itemOnCursor = guiEvent.cursor
+                    if (itemOnCursor != null && itemOnCursor.type != Material.AIR) {
+                        currentIconItem = itemOnCursor.clone()
+                        thread(start = true) {
+                            Thread.sleep(1)
+                            player.setItemOnCursor(itemOnCursor)
+                        }
+                    } else {
+                        currentIconItem = null
+                    }
+                    refreshInputPane()
+                    gui.update()
+                }
+                inputPane.addItem(displayItem, 0, 0)
+            } else {
+                val emptySlotItem = GuiItem(ItemStack(Material.AIR)) { guiEvent ->
+                    guiEvent.isCancelled = true
+                    val itemOnCursor = guiEvent.cursor
+                    if (itemOnCursor != null && itemOnCursor.type != Material.AIR) {
+                        currentIconItem = itemOnCursor.clone()
+                        thread(start = true) {
+                            Thread.sleep(1)
+                            player.setItemOnCursor(itemOnCursor)
+                        }
+                        refreshInputPane()
+                        gui.update()
+                    }
+                }
+                inputPane.addItem(emptySlotItem, 0, 0)
             }
         }
+
+        refreshInputPane()
         gui.ingredientComponent.addPane(inputPane)
 
         // Add confirm menu item
@@ -90,7 +116,7 @@ class WarpIconMenu(
                 PrimaryColourPalette.SUCCESS.color!!)
         val confirmGuiItem = GuiItem(confirmItem) { guiEvent ->
             guiEvent.isCancelled = true
-            val newIcon = gui.ingredientComponent.getItem(0, 0)
+            val newIcon = currentIconItem
             val registryAccess = RegistryAccess.registryAccess()
 
             // Set icon if the item in slot
@@ -170,7 +196,7 @@ class WarpIconMenu(
                     )
                 }
 
-                val result = updateWarpIcon.execute(
+                updateWarpIcon.execute(
                     editorPlayerId = player.uniqueId,
                     warpId = warp.id,
                     materialName = newIcon.type.name,
