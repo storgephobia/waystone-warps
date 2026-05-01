@@ -38,7 +38,7 @@ class WarpManagementMenu(private val player: Player, private val menuNavigator: 
         gui.setOnTopClick { guiEvent -> guiEvent.isCancelled = true }
 
         val pane = StaticPane(9, 1)
-        gui.addPane(pane, Slot.fromXY(0, 0))
+        gui.addPane(Slot.fromXY(0, 0), pane)
 
         // Add privacy modes
         val canChangeAccess = PermissionHelper.canChangeAccessControl(player, warp.playerId)
