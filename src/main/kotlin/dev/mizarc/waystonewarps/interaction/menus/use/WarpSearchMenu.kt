@@ -33,14 +33,14 @@ class WarpSearchMenu(
             guiEvent.click == ClickType.SHIFT_RIGHT) guiEvent.isCancelled = true }
 
         // Add lodestone menu item
-        val firstPane = StaticPane(0, 0, 1, 1)
+        val firstPane = StaticPane(1, 1)
         val headItem = ItemStack(Material.LODESTONE).name("")
         val guiHeadItem = GuiItem(headItem) { guiEvent -> guiEvent.isCancelled = true }
         firstPane.addItem(guiHeadItem, 0, 0)
         gui.firstItemComponent.addPane(firstPane)
 
         // Add confirm menu item.
-        val thirdPane = StaticPane(0, 0, 1, 1)
+        val thirdPane = StaticPane(1, 1)
         val confirmItem = ItemStack(Material.NETHER_STAR).name(
             localizationProvider.get(player.uniqueId, LocalizationKeys.MENU_COMMON_ITEM_CONFIRM_NAME), PrimaryColourPalette.SUCCESS.color!!
         )
