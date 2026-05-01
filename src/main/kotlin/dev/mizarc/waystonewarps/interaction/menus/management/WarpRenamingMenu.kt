@@ -103,7 +103,7 @@ class WarpRenamingMenu(
                             LocalizationKeys.CONDITION_NAMING_EXISTING,
                             name
                         ), PrimaryColourPalette.FAILED.color!!)
-                    val guiPaperItem = GuiItem(paperItem) {guiEvent ->
+                    val guiPaperItem = GuiItem(paperItem) { guiEvent ->
                         secondPane.removeItem(0, 0)
                         lodestoneItem.name(name)
                         isConfirming = true
