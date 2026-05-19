@@ -1,3 +1,5 @@
+### ⚠️ [20 May 2026] Action Required: Upstream History Rewritten. If you have previously forked the project, please refer to this discussion page for further information: https://github.com/mizarc/waystone-warps/discussions/128
+
 ![Banner](branding/banner.png)
 
 # Waystone Warps
