@@ -127,6 +127,12 @@ class WaystoneWarps: JavaPlugin() {
     private lateinit var localizationProvider: LocalizationProvider
 
     override fun onEnable() {
+        // Work around an upstream InventoryFramework bug (unfixed as of IF 0.12.0/master) where
+        // its bundled Anvil GUI implementation for MC 26.1+ throws IllegalAccessError on
+        // Slot.slot. Must run before any anvil-based menu (naming, renaming, search, etc.) can
+        // possibly open. See dev.mizarc.waystonewarps.compat.anvil.FixedAnvilInventoryImpl.
+        dev.mizarc.waystonewarps.compat.anvil.AnvilInventoryPatch.apply(logger)
+
         // Create plugin folder
         if (!dataFolder.exists()) dataFolder.mkdir()
 
@@ -358,3 +364,4 @@ class WaystoneWarps: JavaPlugin() {
         server.pluginManager.registerEvents(WaystoneBaseInteractListener(), this)
     }
 }
+    
