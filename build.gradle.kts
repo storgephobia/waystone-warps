@@ -88,6 +88,11 @@ tasks.test {
 
 tasks.shadowJar {
     archiveClassifier = null
+    relocate("com.github.stefvanschie.inventoryframework", "dev.mizarc.waystonewarps.inventoryframework")
+
+    manifest {
+        attributes("paperweight-mappings-namespace" to "mojang")
+    }
 }
 
 tasks.processResources {
