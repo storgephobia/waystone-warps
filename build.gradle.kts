@@ -61,10 +61,10 @@ dependencies {
     compileOnly("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
     // Replaces the old compileOnly("io.papermc.paper:paper-api:...") - the dev bundle already
     // includes the full Paper API, plus Mojang-mapped NMS access needed by
-    // dev.mizarc.waystonewarps.compat.anvil.FixedAnvilInventoryImpl. Adjust the version string
-    // below to match your actual server build if it doesn't resolve - see comment at bottom of
-    // file for how to check.
-    paperweight.paperDevBundle("26.2.build.+")
+    // dev.mizarc.waystonewarps.compat.anvil.FixedAnvilInventoryImpl. Pinned to 26.1.2 to match
+    // the actual deployed server (Purpur 26.1.2-2587-dc4a255) - adjust if you're on a different
+    // build; see comment at bottom of file for how to check.
+    paperweight.paperDevBundle("26.1.2.build.+")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
     compileOnly("io.insert-koin:koin-core-jvm:4.1.1")
     implementation("co.aikar:idb-core:1.0.0-SNAPSHOT")
@@ -146,9 +146,10 @@ tasks.build {
 }
 
 // --- paperweight-userdev notes ---
-// 1. "26.2.build.+" resolves the latest published dev bundle build for MC 26.2. If it fails to
-//    resolve, run `./gradlew showPaperVersions` to list what's actually available and pin a
-//    specific one instead, e.g. paperweight.paperDevBundle("26.2.build.60-beta").
+// 1. "26.1.2.build.+" resolves the latest published dev bundle build for MC 26.1.2, matching your
+//    Purpur 26.1.2-2587-dc4a255. If it fails to resolve, run `./gradlew showPaperVersions` to see
+//    what's actually published and pin a specific one instead, e.g.
+//    paperweight.paperDevBundle("26.1.2.build.67-stable").
 // 2. Reobfuscation is intentionally not configured: Paper dropped it for 26.1+ (there's no more
 //    obfuscated/Spigot mapping to reobf to), so the normal shadowJar/build tasks above are enough.
 // 3. If the dev bundle's toolchain doesn't match ours (JDK 21), you'll get an error during the
