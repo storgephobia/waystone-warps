@@ -314,7 +314,7 @@ class WaystoneWarps: JavaPlugin() {
                 discoveryRepository, warpEventPublisher, get(), playerStateRepository)}
             single { LogPlayerMovement(movementMonitorService) }
             single { DiscoverWarp(discoveryRepository, warpEventPublisher) }
-            single { MoveWarp(warpRepository, structureBuilderService, structureParticleService, hologramService, warpEventPublisher) }
+            single { MoveWarp(warpRepository, structureBuilderService, structureParticleService, hologramService, warpEventPublisher, configService) }
             single { ToggleLock(warpRepository, warpEventPublisher) }
             single { GetWhitelistedPlayers(whitelistRepository) }
             single { ToggleWhitelist(whitelistRepository, warpRepository) }
@@ -364,4 +364,3 @@ class WaystoneWarps: JavaPlugin() {
         server.pluginManager.registerEvents(WaystoneBaseInteractListener(), this)
     }
 }
-    
