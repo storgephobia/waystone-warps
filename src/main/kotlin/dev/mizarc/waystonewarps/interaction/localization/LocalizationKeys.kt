@@ -11,6 +11,7 @@ object LocalizationKeys {
     const val FEEDBACK_MOVE_TOOL_NO_SPACE = "feedback.move_tool.no_space"
     const val FEEDBACK_MOVE_TOOL_SUCCESS = "feedback.move_tool.success"
     const val FEEDBACK_MOVE_TOOL_NOT_OWNER = "feedback.move_tool.not_owner"
+    const val FEEDBACK_MOVE_TOOL_TOO_FAR = "feedback.move_tool.too_far"
 
     // Waystone Base Interact
     const val FEEDBACK_WAYSTONE_SKIN_UPDATED = "feedback.waystone.skin_updated"
