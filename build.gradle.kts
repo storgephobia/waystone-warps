@@ -42,9 +42,6 @@ repositories {
         url = uri("https://jitpack.io")
     }
     maven {
-        url = uri("https://repo.glaremasters.me/repository/towny/")
-    }
-    maven {
         name = "Multiverse"
         url = uri("https://repo.onarandombox.com/public")
     }
