@@ -9,8 +9,10 @@ import dev.mizarc.waystonewarps.interaction.localization.LocalizationProvider
 import dev.mizarc.waystonewarps.interaction.messaging.PrimaryColourPalette
 import dev.mizarc.waystonewarps.interaction.utils.PermissionHelper
 import net.kyori.adventure.text.Component
+import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.World
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
@@ -78,7 +80,10 @@ class MoveToolListener: Listener, KoinComponent {
         val result = moveWarp.execute(
             event.player.uniqueId, 
             UUID.fromString(warpId), 
+            event.block.world.uid,
             aboveLocation.toPosition3D(),
+            isSourceWorldNether = Bukkit.getWorld(warp.worldId)?.environment == World.Environment.NETHER,
+            isDestinationWorldNether = event.block.world.environment == World.Environment.NETHER,
             bypassOwnership = event.player.hasPermission("waystonewarps.bypass.relocate")
         )
         when (result) {
@@ -105,6 +110,16 @@ class MoveToolListener: Listener, KoinComponent {
                 val message = localizationProvider.get(
                     event.player.uniqueId, 
                     LocalizationKeys.FEEDBACK_MOVE_TOOL_WARP_NOT_FOUND
+                )
+                event.player.sendActionBar(
+                    Component.text(message)
+                        .color(PrimaryColourPalette.FAILED.color))
+                event.isCancelled = true
+            }
+            MoveWarpResult.TOO_FAR -> {
+                val message = localizationProvider.get(
+                    event.player.uniqueId, 
+                    LocalizationKeys.FEEDBACK_MOVE_TOOL_TOO_FAR
                 )
                 event.player.sendActionBar(
                     Component.text(message)
