@@ -39,11 +39,11 @@ repositories {
         url = uri("https://repo.aikar.co/content/groups/aikar/")
     }
     maven {
-        url = uri("https://jitpack.io")
-    }
-    maven {
         name = "Multiverse"
         url = uri("https://repo.onarandombox.com/public")
+    }
+    maven {
+        url = uri("https://jitpack.io")
     }
 }
 
@@ -59,9 +59,9 @@ dependencies {
     implementation("com.github.stefvanschie.inventoryframework:IF:0.12.0")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
     compileOnly("me.xdrop:fuzzywuzzy:1.4.0")
-    implementation("com.github.TownyAdvanced:Towny:0.103.0.7")
-    // compileOnly ("com.palmergames.bukkit.towny:towny:0.103.0.7")
     compileOnly("org.mvplugins.multiverse.inventories:multiverse-inventories:5.3.5")
+    implementation("com.github.TownyAdvanced:Towny:0.103.1.0")
+    // compileOnly ("com.palmergames.bukkit.towny:towny:0.103.0.7")
 }
 
 java {
