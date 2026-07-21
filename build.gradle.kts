@@ -59,7 +59,7 @@ dependencies {
     implementation("com.github.stefvanschie.inventoryframework:IF:0.12.0")
     compileOnly("com.github.MilkBowl:VaultAPI:1.7.1")
     compileOnly("me.xdrop:fuzzywuzzy:1.4.0")
-    compileOnly("com.github.TownyAdvanced:Towny:0.103.1.0")
+    compileOnly("com.github.TownyAdvanced:towny:0.103.1.0")
     compileOnly("org.mvplugins.multiverse.inventories:multiverse-inventories:5.3.5")
 }
 
